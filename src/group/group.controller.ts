@@ -29,6 +29,10 @@ export class GroupController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.groupService.remove(+id);
+    return this.groupService.removeGroup(+id);
+  }
+  @Get('/users/:id')
+  findUsers(@Param('id') id:number){
+    return this.groupService.findUsers(id);
   }
 }
