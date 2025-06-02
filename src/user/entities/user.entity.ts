@@ -5,7 +5,7 @@ import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMa
 
 @Entity()
 export class User {
-   @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 30 })
@@ -24,9 +24,8 @@ export class User {
   password: string;
 
   @Column({ type: 'enum', enum: ['m', 'f', 'u'] })
-  
   gender: string;
-  
+
   @CreateDateColumn()
   createdAt: Date;
 
@@ -36,18 +35,14 @@ export class User {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @OneToMany(()=>Post,(post)=>post.user,{ cascade: true })
+  @OneToMany(() => Post, (post) => post.user, { cascade: true })
   posts: Post[];
 
-
-  // @ManyToMany(()=>Group,(group)=>group.users,{cascade:true})
-  // @JoinTable()
-  // groups: Group[]
-   @ManyToMany(() => Group, group => group.users, {
+  @ManyToMany(() => Group, group => group.users, {
     cascade: true,
     onDelete: 'CASCADE',
   })
   @JoinTable() // only on one side
   groups: Group[];
-    
+
 }

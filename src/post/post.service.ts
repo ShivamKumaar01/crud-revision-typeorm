@@ -9,11 +9,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 export class PostService {
   @InjectRepository(Post) private readonly postRepository: Repository<Post>
   create(createPostDto: CreatePostDto) {
-    const post:Post=new Post()
-    post.title=createPostDto.title
-    post.description=createPostDto.description
-    // post.userId=createPostDto.userId
-      post.user = { id: createPostDto.userId } as any;
+    const post: Post = new Post()
+    post.title = createPostDto.title
+    post.description = createPostDto.description
+    post.user = { id: createPostDto.userid } as any;
     return this.postRepository.save(post)
   }
 
@@ -22,35 +21,35 @@ export class PostService {
   }
 
   findOne(id: number) {
-    return this.postRepository.findOneBy({id})
+    return this.postRepository.findOneBy({ id })
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
-    const value=this.postRepository.update({id},{...updatePostDto})
-    return {message:"post updated successfully"}
+    const value = this.postRepository.update({ id }, { ...updatePostDto })
+    return { message: "post updated successfully" }
   }
 
   remove(id: number) {
     return this.postRepository.delete(id)
   }
 
-  async getAllUsers(page:number,limit:number,search?:string){
-    const skip=(page-1)*limit;
-    const whereClause=search
-    ?{title:ILike(`%${search}%`)}
-    :{};
-    const[users,total]=await this.postRepository.findAndCount({
-      where:whereClause,
+  async getAllUsers(page: number, limit: number, search?: string) {
+    const skip = (page - 1) * limit;
+    const whereClause = search
+      ? { title: ILike(`%${search}%`) }
+      : {};
+    const [users, total] = await this.postRepository.findAndCount({
+      where: whereClause,
       skip,
-      take:limit,
-      order:{id:'ASC'}
+      take: limit,
+      order: { id: 'ASC' }
     })
     return {
-      data:users,
+      data: users,
       total,
-      currentPage:page,
-      totalPages:Math.ceil(total/limit)
+      currentPage: page,
+      totalPages: Math.ceil(total / limit)
     }
   }
-  
+
 }

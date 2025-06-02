@@ -12,17 +12,17 @@ export class Post {
   @Column({ type: 'varchar', length: 300 })
   description: string
 
-   @CreateDateColumn()
-    createdAt: Date;
-  
-    @UpdateDateColumn()
-    updatedAt: Date;
-  
-    @DeleteDateColumn()
-    deletedAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @ManyToOne(()=>User,(user)=>user.posts, { onDelete: 'CASCADE' })
-    user: User;
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-   
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @ManyToOne(() => User, (user) => user.posts, { onDelete: 'CASCADE' })
+  user: User;
+
+
 } 

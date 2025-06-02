@@ -4,19 +4,17 @@ import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Group {
     @PrimaryGeneratedColumn()
-    id:number
+    id: number
 
     @Column()
-    title:string
+    title: string
 
     @Column()
-    description:string
+    description: string
 
     @Column()
-    admin:string
+    admin: string
 
-    // @ManyToMany(()=>User,(user)=>user.groups)
-    // users:User[]
-   @ManyToMany(() => User, user => user.groups)
-users: User[];
+    @ManyToMany(() => User, user => user.groups)
+    users: User[];
 }

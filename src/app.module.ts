@@ -19,7 +19,8 @@ import { Post } from './post/entities/post.entity';
       entities: [User,Group,Post],
       database: 'crud-revision',
       synchronize: true,//Indicates if database schema should be auto created on every application launch.
-      logging: false,  //it shows query in console
+      logging: true, 
+      migrations:[] //it shows query in console
     }),UserModule, PostModule, GroupModule],
   controllers: [AppController],
   providers: [AppService],

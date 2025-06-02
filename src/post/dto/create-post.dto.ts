@@ -11,7 +11,7 @@ export class CreatePostDto {
     description:string
     
     @IsInt()
-    userId:number
+    userid:number
 
     
 
