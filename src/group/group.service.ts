@@ -89,40 +89,42 @@ export class GroupService {
       await queryRunner.release();
     }
 
+
   }
-//   async removeGroup(id: number) {
-//   try {
-//     await this.datasource.transaction(async (manager) => {
-//       const groupRepository = manager.getRepository(Group);
+  // another method to do transaction
+  //   async removeGroup(id: number) {
+  //   try {
+  //     await this.datasource.transaction(async (manager) => {
+  //       const groupRepository = manager.getRepository(Group);
 
-//       const group = await groupRepository.findOne({
-//         where: { id },
-//         relations: ['users'],
-//       });
+  //       const group = await groupRepository.findOne({
+  //         where: { id },
+  //         relations: ['users'],
+  //       });
 
-//       if (!group) {
-//         throw new NotFoundException('Group not found');
-//       }
+  //       if (!group) {
+  //         throw new NotFoundException('Group not found');
+  //       }
 
-//       // Break relation with users
-//       group.users = [];
-//       await groupRepository.save(group);
+  //       // Break relation with users
+  //       group.users = [];
+  //       await groupRepository.save(group);
 
-//       console.log("hi");
-//       let value = 1;
-//       if (value) {
-//         throw new Error("error in db connection");
-//       }
+  //       console.log("hi");
+  //       let value = 1;
+  //       if (value) {
+  //         throw new Error("error in db connection");
+  //       }
 
-//       await groupRepository.remove(group);
-//     });
+  //       await groupRepository.remove(group);
+  //     });
 
-//     return { message: "Group deleted successfully" };
-//   } catch (err) {
-//     console.error("Transaction failed:", err.message);
-//     throw new HttpException("Failed to delete group", 500);
-//   }
-// }
+  //     return { message: "Group deleted successfully" };
+  //   } catch (err) {
+  //     console.error("Transaction failed:", err.message);
+  //     throw new HttpException("Failed to delete group", 500);
+  //   }
+  // }
 
 
 }

@@ -8,20 +8,26 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user/entities/user.entity';
 import { Group } from './group/entities/group.entity';
 import { Post } from './post/entities/post.entity';
+// import dataSource from 'data-source';
+import { TestModule } from './test/test.module';
+import { TestingModule } from './testing/testing.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [TypeOrmModule.forRoot(
+    // dataSourceOptions
+    {
       type: 'postgres',
       host: 'localhost',
       port: 5432,
       password: 'admin',
       username: 'postgres',
-      entities: [User,Group,Post],
+      entities: ['dist/**/*,entity.js'],
       database: 'crud-revision',
       synchronize: true,//Indicates if database schema should be auto created on every application launch.
       logging: true, 
       migrations:[] //it shows query in console
-    }),UserModule, PostModule, GroupModule],
+    }
+  ),UserModule, PostModule, GroupModule, TestModule,TestModule, TestingModule],
   controllers: [AppController],
   providers: [AppService],
 })
